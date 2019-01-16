@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+  source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
@@ -38,8 +38,21 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
+
+# Faker gem to create fake seed information
+gem 'faker'
+
+## Gemfile for Rails 3+, Sinatra, and Merb
+gem 'will_paginate'
+
+# Simple way to upload files from Ruby. 
+gem 'carrierwave'
+
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick'
+
+# accept payments via card 
+gem 'braintree'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

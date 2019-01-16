@@ -1,0 +1,22 @@
+
+<div class = "paginate_index"><%= will_paginate @listings %></div>
+<%@listings.order("id").each do |x| %>
+<div class="listings">
+<h3>Listing #<%= x.id %> 
+ by <a href="<%= "/users/#{User.find(x.user_id).id}" %>"><%=User.find_by_id(x.user_id).name%></a></h3>
+<h3><a href="<%= "/listings/#{x.id}" %>"><%= x.title %></a><%if x.verified == true %>
+<%=image_tag 'verified.png', style: 'height:20px;width:auto;'%>
+<%end%></h3>
+<b>Price per day:</b> $<%=x.price%> </br>
+Property type: <%= x.property_type %>
+</br>
+
+<%= x.description %>
+
+
+
+</div>
+
+<%end%>
+
+<div class = "paginate_index"><%= will_paginate @listings %></div>

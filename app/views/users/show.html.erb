@@ -1,0 +1,31 @@
+<div class="users">
+<h3>User #<%= @user.id %>
+ <h4><a href="<%= "/users/#{User.find(@user.id).id}" %>"><%=User.find_by_id(@user.id).name%></a></h4>
+<%if @user.avatar.url == nil %>
+<%else%>
+<%=image_tag (@user.avatar.url), style: 'height: 200px;width:auto;'%>
+<%end%>
+<h5>Contact:  <%=@user.email%> </h5> 
+
+<h4> Listings by <%=@user.name%> </h4>
+
+
+<%@listing.each do |x| %>
+<div class="listings">
+<h3>Listing #<%= x.id %> </h3>
+<h3><a href="<%= "/listings/#{x.id}" %>"><%= x.title %></a><%if x.verified == true %>
+<%=image_tag 'verified.png', style: 'height:20px;width:auto;'%>
+<%end%></h3>
+
+<%= x.property_type %>
+</br>
+
+<%= x.description %>
+
+
+
+</div>
+<%end%>
+
+
+</div>
