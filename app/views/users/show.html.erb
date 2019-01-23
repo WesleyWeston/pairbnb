@@ -1,0 +1,49 @@
+<div class="users">
+<h3>User #<%= @user.id %>
+ <h4><a href="<%= "/users/#{User.find(@user.id).id}" %>"><%=User.find_by_id(@user.id).name%></a></h4>
+<%if @user.avatar.url != nil %>
+<%profile_image  = @user.avatar.url%>
+<%else%>
+<% profile_image = "avatar.png" %>
+<%end%>
+<%=image_tag (profile_image), style: 'height: 200px;width:auto;'%>
+<h5>Contact:  <%=@user.email%> </h5> 
+
+<h4><u>My Bookings</u></h4>
+<%@booking.each do |b| %>
+<div= class="bookings">
+<h5> <a href="<%= "/listings/#{b.listing_id}"%>"> <%=Listing.find_by_id("#{b.listing_id}").title%></a></h5>
+<p>Address: <%=Listing.find_by_id("#{b.listing_id}").address%> </p>
+<p>From <%=b.start_date%> to <%=b.end_date%> </br>
+Total Price: $<%=b.total_price%> </p>
+
+Hosted by: <a href="<%= "/users/#{Listing.find_by_id("#{b.listing_id}").user_id}"%>"> <%=User.find_by_id("#{Listing.find_by_id("#{b.listing_id}").user_id}").name%></a>
+
+
+
+<%end%>
+</br>
+</br>
+
+<h4><u>My Listings</u></h4>
+
+
+<%@listing.each do |x| %>
+<div class="listings">
+<h5>Listing #<%= x.id %> </h5>
+<h5><a href="<%= "/listings/#{x.id}" %>"><%= x.title %></a><%if x.verified == true %>
+<%=image_tag 'verified.png', style: 'height:20px;width:auto;'%>
+<%end%></h5>
+
+<%= x.property_type %>
+</br>
+
+<%= x.description %>
+
+
+
+</div>
+<%end%>
+
+
+</div>

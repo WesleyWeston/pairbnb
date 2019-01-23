@@ -1,0 +1,26 @@
+<div class="listings">
+<h3>Listing #<%= @listing.id %>
+<%= @listing.title %><%if @listing.verified == true %>
+<%=image_tag 'verified.png', style: 'height:20px;width:auto;'%>
+<%end%></h3>
+ <h4>Created by <a href="<%= "/users/#{User.find(@listing.user_id).id}" %>"><%=User.find_by_id(@listing.user_id).name%></a></h4>
+ <h4>Price per day <%=@listing.price%></h4>
+
+<h4>Located at: <%=@listing.address%> </h4>
+This property is a <%= @listing.property_type %>. </br>
+
+This is a <%=@listing.accomodation_type%> accomodation.
+</br>
+
+This accomodation can hold up to <%=@listing.occupant_limit%> guests and has <%=@listing.bedrooms%> bedrooms.
+
+<h4> Property Description</h4>
+<%= @listing.description %>
+<%if @listing.images.url == nil %>
+<%else%>
+<%= image_tag(@listing.images.url)%>
+<%end%>
+
+<%= button_to ("Book"), new_listing_bookings_path(@listing.id), method: :get %>
+
+</div>

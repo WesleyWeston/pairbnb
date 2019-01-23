@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Congratulations <%=@user.name%>! You have received a booking confirmation from <%=User.find_by_id(@listing.user_id).name%>. </h1>
+    	You're booked from <%=@complete_booking.start_date%> unitl <%=@complete_booking.end_date%> at <%=@listing.title%>.
+
+    	The address is <%=@listing.address%>.
+
+    	The Total cost of this booking has been $<%=@complete_booking.total_price%>.
+    <p>
+      You can see details of your new reservation here: <%= @url %>
+    </p>
+  </body>
+</html> 

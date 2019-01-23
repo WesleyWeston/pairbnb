@@ -1,0 +1,15 @@
+				<%if @listings.count < 1%>
+			</br> </br>
+				<h2>There are no listings that match your search</h2>
+				<a href="<%="/listings"%>">Back to all listings</a>
+				<%end%>
+
+
+<div class = "sort_paginate_ajax"><%= render 'listing'%> </div>
+
+
+<script>
+   $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+   });
+ </script>

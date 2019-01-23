@@ -1,14 +1,23 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  mount_uploader :avatar, AvatarUploader
+
  has_many :authentications, dependent: :destroy
 
+ # Role value relates to array index value.
+
+ enum role:[:Customer, :Moderator, :Superadmin]
+
  def self.create_with_auth_and_hash(authentication, auth_hash)
-   user = self.create!(
+  
+   user = self.new(
      name: auth_hash["info"]["name"],
      email: auth_hash["info"]["email"],
      password: SecureRandom.hex(10)
    )
+   user.remote_avatar_url = auth_hash["info"]["image"]
+   user.save
    user.authentications << authentication
    return user
  end

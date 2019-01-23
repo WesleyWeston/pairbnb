@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_040813) do
+ActiveRecord::Schema.define(version: 2019_01_15_035528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,33 @@ ActiveRecord::Schema.define(version: 2019_01_10_040813) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "listing_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "days"
+    t.integer "total_price"
+    t.boolean "payment_status", default: false
+    t.index ["listing_id"], name: "index_bookings_on_listing_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.string "address", null: false
+    t.string "property_type", null: false
+    t.string "accomodation_type", null: false
+    t.integer "price"
+    t.integer "bedrooms", null: false
+    t.integer "occupant_limit", null: false
+    t.boolean "verified", default: false
+    t.bigint "user_id", null: false
+    t.json "images"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -33,6 +60,8 @@ ActiveRecord::Schema.define(version: 2019_01_10_040813) do
     t.string "encrypted_password", limit: 128, null: false
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
+    t.integer "role", default: 0
+    t.json "avatar"
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end

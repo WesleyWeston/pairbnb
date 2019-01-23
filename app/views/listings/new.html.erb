@@ -1,0 +1,11 @@
+<div id="listing" class="new_listing">
+  <h2>Setup your new listing!</h2>
+
+    <%= form_with url: listings_path,scope: :listing, method: :post, local: true do |form| %>
+    <%= render partial: '/listings/form', object: form %>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    <%end%>
