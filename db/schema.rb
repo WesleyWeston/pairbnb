@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 2019_01_15_035528) do
     t.bigint "listing_id"
     t.date "start_date"
     t.date "end_date"
+    t.integer "days"
+    t.integer "total_price"
+    t.boolean "payment_status", default: false
     t.index ["listing_id"], name: "index_bookings_on_listing_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end

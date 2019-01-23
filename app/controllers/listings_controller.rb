@@ -2,7 +2,6 @@ class ListingsController < ApplicationController
 	
 	def create
 	
-		
 		@listings =Listing.new(listing_params)
 		
 		@listings.user_id = current_user.id
@@ -27,7 +26,13 @@ class ListingsController < ApplicationController
 
 	def index
 
-		@listings = Listing.all.paginate(:page => params[:page], :per_page => 10)
+		@listings = Listing.all.paginate(:page => params[:page], :per_page => 12)
+		@listings = @listings.bedrooms(params[:bedrooms]) if params[:bedrooms].present?
+		@listings = @listings.address(params[:address]) if params[:address].present?
+		
+		@listings = @listings.price_min(params[:min]) if params[:min].present?
+		@listings = @listings.price_max(params[:max]) if params[:max].present?
+		@listings = @listings.verified(params[:verified]) if params[:verified] == '1'
 
 	end
 
@@ -53,7 +58,8 @@ class ListingsController < ApplicationController
 		:bedrooms,
 		:occupant_limit,
 		:images,
-		:price
+		:price,
+		:verified
 		)
 	end
 end

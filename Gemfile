@@ -48,11 +48,22 @@ gem 'will_paginate'
 # Simple way to upload files from Ruby. 
 gem 'carrierwave'
 
+
 # Use ActiveStorage variant
 gem 'mini_magick'
 
+#install JQuery for AJAX 
+gem 'jquery-rails'
+
+
 # accept payments via card 
 gem 'braintree'
+
+#checks for dates overlapping.
+gem 'validates_overlap'
+
+
+gem 'sidekiq'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

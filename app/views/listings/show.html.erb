@@ -4,7 +4,7 @@
 <%=image_tag 'verified.png', style: 'height:20px;width:auto;'%>
 <%end%></h3>
  <h4>Created by <a href="<%= "/users/#{User.find(@listing.user_id).id}" %>"><%=User.find_by_id(@listing.user_id).name%></a></h4>
- <h4>Price per day $<%=@listing.price%></h4>
+ <h4>Price per day <%=@listing.price%></h4>
 
 <h4>Located at: <%=@listing.address%> </h4>
 This property is a <%= @listing.property_type %>. </br>

@@ -1,16 +1,21 @@
 class BookingsController < ApplicationController
 
 	def create 
-		@bookings = Booking.new(booking_params)
+		@booking = Booking.new(booking_params)
 		
-		@bookings.user_id = current_user.id
-		@bookings.listing_id = params[:listing_id]
+		@booking.user_id = current_user.id
+		@booking.listing_id = params[:listing_id]
+		@booking.days = @booking.end_date - @booking.start_date
+		if @booking.days < 1 
+			redirect_to "error"
+		end
+		@booking.total_price = @booking.days * Listing.find_by_id(params[:listing_id]).price
+		
+		
 
-		
-		
+		if @booking.save 
 
-		if @bookings.save 
-			redirect_to '/'
+			redirect_to new_booking_braintree_path(@booking.id)
 		else
 			redirect_to "error"
 		end
@@ -30,7 +35,9 @@ class BookingsController < ApplicationController
 	params.require(:booking).permit(
 		:start_date,
 		:end_date,
-		:listing_id
+		:listing_id,
+		:days,
+		:total_price
 		)
 	end
 end

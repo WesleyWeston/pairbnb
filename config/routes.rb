@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'braintrees/new'
   root "users#index"
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
@@ -11,10 +12,14 @@ Rails.application.routes.draw do
   end
 
   resources :listings do 
-    resource :bookings
+    resource :bookings 
+  end
+  resources :bookings do 
+    resource :braintree 
   end
   resources :users
   
+  post 'braintrees/checkout'
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"

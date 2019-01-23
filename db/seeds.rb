@@ -35,13 +35,15 @@ ActiveRecord::Base.transaction do
     listing['address'] = Faker::Address.full_address
     listing['property_type'] = ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"].sample
     listing['accomodation_type'] = ["Entire", "Private room", "Shared room"].sample
-    listing['bedrooms'] = rand(0..5)
+    listing['bedrooms'] = rand(1..8)
     listing['occupant_limit'] = rand(1..10)
     listing['user_id'] = uids.sample
     listing['price'] = rand(20..500)
-    listing['images'] = Faker::Avatar.image("https://media.architecturaldigest.com/photos/5a39377f38bb817b7ffe1dd7/4:3/w_384/airbnb-tips-greenwich-village-apt.jpg")
-
-    Listing.create(listing)
+    listing['verified'] = [true, false].sample
+    x = Listing.new(listing) 
+    x.remote_images_url = Faker::Avatar.image
+    x.save
+    # Listing.create(listing)
   end
 
 

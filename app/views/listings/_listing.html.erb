@@ -1,0 +1,50 @@
+<div class = "paginate_index "><%= will_paginate @listings, remote: true %></div>
+
+	
+	<div class = "album py-5 bg-light ">
+		<div class = "container ">
+			<div class ="row ">
+
+
+
+		<%@listings.order("id").each do |x| %>
+			<div class="justify-content-center col-xl-4 col-lg-6 col-md-12">
+				<h4>
+					<a href="<%= "/listings/#{x.id}" %>"><%= x.title %></a>
+					<%if x.verified == true %>
+					<%=image_tag 'verified.png', style: 'height:20px;width:auto;'%>
+					<%end%>
+				</h4>
+
+
+
+				<h5>Listing #<%= x.id %> by <a href="<%= "/users/#{User.find(x.user_id).id}" %>"><%=User.find_by_id(x.user_id).name%></a>
+				</h5>
+
+				
+
+				<div class="justify-content-center col-mb-4 shadow-sm ">
+					<%if x.images.url == nil %>
+						<%else%>
+							<%= image_tag(x.images.url)%>
+						<%end%></br>
+
+					<b>Price per day:</b> $<%=x.price%> </br></br>
+					Property type: <%= x.property_type %> </br>
+					<%= x.description %>
+						
+				</div>
+
+
+
+					</br>
+					</br>
+					</br>
+			</div>
+
+			<%end%>
+		</div>
+	</div>
+
+
+<div class = "paginate_index"><%= will_paginate @listings %></div>
